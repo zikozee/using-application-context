@@ -31,12 +31,16 @@ public class Setup implements CommandLineRunner {
         PermissionProvider permissionProvider = context.getApplicationContext().getBean(Bean1EnumImpl.class);
         Set<CreatePermissionDTO> provide = permissionProvider.provide();
         provide.forEach(createPermissionDTO -> log.info("Bean1 PERMISSIONS {}", createPermissionDTO.toString() ));
+
         System.out.println("******************************************");
+
         log.info("Bean2  Permissions.............");
         PermissionProvider permissionProvider2 = context.getApplicationContext().getBean(Bean2EnumImpl.class);
         Set<CreatePermissionDTO> provide2 = permissionProvider2.provide();
         provide2.forEach(createPermissionDTO -> log.info("Bean1 PERMISSIONS {}", createPermissionDTO.toString() ));
+
         System.out.println("******************************************");
+
         log.info("All Permissions  Permissions.............");
         permissionProviders.forEach(permissionProvider1 ->
                 permissionProvider1.provide().forEach(createPermissionDTO -> log.info("PermissionProvider Bean {}", createPermissionDTO.toString() )));
