@@ -7,6 +7,7 @@ import com.example.applicationcontext.permissions.bean2.Bean2EnumImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -59,6 +60,14 @@ public class Setup implements CommandLineRunner {
                     .forEach(createPermissionDTO -> log.info("Bean1 PERMISSIONS {}", createPermissionDTO.toString()));
         });
 
+
+        log.info("Beans with @Service Annotations");
+        Map<String, Object> beans = context.getApplicationContext().getBeansWithAnnotation(Service.class);
+
+        beans.forEach((key, value) -> {
+            log.info("Bean Name {}", key);
+            log.info("Bean {}", value.getClass().getName());
+        });
 
     }
 }
