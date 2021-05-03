@@ -10,6 +10,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -41,10 +42,23 @@ public class Setup implements CommandLineRunner {
 
         System.out.println("******************************************");
 
-        log.info("All Permissions  Permissions.............");
+        log.info("All Permissions.............");
         permissionProviders.forEach(permissionProvider1 ->
                 permissionProvider1.provide().forEach(createPermissionDTO -> log.info("PermissionProvider Bean {}", createPermissionDTO.toString() )));
+
         System.out.println("******************************************");
+        System.out.println("******************************************");
+
+        log.info("Using another way to get all permissions");
+        Map<String, PermissionProvider> beansMap = context.getApplicationContext().getBeansOfType(PermissionProvider.class);
+
+        beansMap.forEach((key, value) -> {
+            log.info(key);
+            log.info("Corresponding permissions...");
+            value.provide()
+                    .forEach(createPermissionDTO -> log.info("Bean1 PERMISSIONS {}", createPermissionDTO.toString()));
+        });
+
 
     }
 }
